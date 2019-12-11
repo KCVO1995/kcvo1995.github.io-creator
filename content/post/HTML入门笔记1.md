@@ -3,7 +3,7 @@ title: "HTML入门笔记1"
 date: 2019-12-11T16:23:26+08:00
 draft: false
 ---
-Ⅰ、Ⅱ、Ⅲ、Ⅳ、Ⅴ、Ⅵ、Ⅶ、Ⅷ、Ⅸ、Ⅹ
+
 # Ⅰ.HTML 是谁发明的？
 ![李爵士](/images/Sir_Tim_Berners-Lee.jpg)
 
