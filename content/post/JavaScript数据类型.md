@@ -1,6 +1,6 @@
 ---
 title: "JavaScript数据类型"
-date: 2019-12-29T15:23:26+08:00
+date: 2019-12-30T15:23:26+08:00
 draft: false
 ---
 
@@ -91,7 +91,6 @@ symbol使用情况很少，暂且不讲，以后用到再补充
 答:记住五个falsy值，falsy就是相当于false，但又不是false的值
 * undefined
 * null
-* false
 * 0
 * NaN
 * ""或''（空字符串）
