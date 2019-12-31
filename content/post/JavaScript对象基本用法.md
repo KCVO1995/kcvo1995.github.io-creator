@@ -1,5 +1,5 @@
 ---
-title: "JS 对象基本用法"
+title: "JavaScript对象基本用法"
 date: 2019-12-31T15:15:26+08:00
 draft: false
 ---
