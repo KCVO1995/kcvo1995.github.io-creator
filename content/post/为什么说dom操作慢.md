@@ -4,6 +4,8 @@ date: 2020-01-10T12:20:26+08:00
 draft: false
 ---
 
+![背景](/images/bg2.jpg)
+
 在学前端的过程中，经常会听说DOM操作慢，要尽量少去操作DOM，本文就浅析一下DOM操作慢的原因
 
 我们知道：
@@ -12,7 +14,7 @@ draft: false
 
 ### 那document.body.appendChild('div1')这句JS是如何改变页面的呢？
 
-我们先来完成一下这句JS语句的代码
+我们先来完善一下这句JS语句的代码
 ```
 let div1 = document.createElement('div1')
 div1.innerTEXT = 'h1'
