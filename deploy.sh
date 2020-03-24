@@ -1,8 +1,9 @@
 git add .
 git commit -m 'update'
 git push
+
 hugo 
-cd pulic
+cd public
 git add .
 git commit -m 'update'
 git push
