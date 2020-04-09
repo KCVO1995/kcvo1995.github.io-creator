@@ -44,7 +44,7 @@ draft: false
 
 下面是我搜了很久发现的一个答案
 
-```
+```javascript
 .use('svgo-loader').loader('svgo-loader')
       .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end()
 ```

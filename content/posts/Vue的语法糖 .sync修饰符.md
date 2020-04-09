@@ -6,7 +6,7 @@ draft: false
 
 ### 看完这个栗子就明白了：
 
-```
+```javascript
 <template>
   <div style='border: 3px solid red;padding: 10px;'>
     App.vue 我现在有 {{total}}

@@ -8,7 +8,7 @@ draft: false
 
 面试中你可能会遇到这样的题目
 
-```
+```javascript
 let a = {
   speak: function() {
     console.log(this)
@@ -30,7 +30,7 @@ a.speak()     // 打印出的this 是 a
 
 我们先来看看JS（ES5） 的三种函数调用形式
 
-```
+```javascript
 fn(p1, p2)
 obj.fn(p1, p2)
 fn.call(p0, p1, p2)
@@ -40,13 +40,13 @@ fn.call(p0, p1, p2)
 
 实际上第三种调用方法才是正确的调用方式，也就是
 
-```
+```javascript
 fn.call(p0, p1, p2)
 ```
 
 其他两种调用方式都是语法糖，并且可以等价的改为 call 形式
 
-```
+```javascript
 fn(p1, p2)  // 等价于
 fn.call(undefined, p1, p2)
 
@@ -62,7 +62,7 @@ fn.call(obj, p1, p2)
 
 先来看看 fn(p1, p2) 中的this如何确定
 
-```
+```javascript
 function fn () {
   console.log(this)
 }
@@ -89,7 +89,7 @@ fn.call(undefined) // 可以简写成 fn.call()
 
 现在，再看看第一条题目
 
-```
+```javascript
 let a = {
   speak: function() {
     console.log(this)
@@ -108,7 +108,7 @@ a.speak.call(a)     // this 就是 a
 
 ## [ ] 语法
 
-```
+```javascript
 function fn() { console.log(this) }
 let arr = [fn, fn2]
 arr[0]() // 这里面的this 又是什么？
@@ -127,7 +127,7 @@ arr[0]
 
 ## Event Handler 中的 this
 
-```
+```javascript
 btn.addEventListener('click', function handler() {
   console.log(this)  // 请问这里的this是什么
 })
@@ -145,7 +145,7 @@ btn.addEventListener('click', function handler() {
 
 按照文档的解释，浏览器的源代码，你可以假象为是这样写的
 
-```
+```javascript
 // 当事件触发时
 handler.call( event.currentTarget, event )
 // 答案不言而喻了
@@ -153,7 +153,7 @@ handler.call( event.currentTarget, event )
 
 ## jQuery Event Handler 中的 this
 
-```
+```javascript
 $ul.on('clikc', 'li', function() {
   console.log(this)
 })

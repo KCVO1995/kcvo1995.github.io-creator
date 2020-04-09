@@ -43,7 +43,7 @@ draft: false
 
 对于记账项目，记账金额需要按照不同的时间单位显示，例如按月，按周，按日，如果每次都要写一个函数进行显示，显然是繁琐的，于是我想出了一个可以复用的显示金额函数
 
-```
+```javascript
 const showAmount = (type: string, unit: Unit, according: any, record: boolean) => {
   const recordList = clone(store.state.recordList).filter(record => record.type === type);
   if (recordList.length === 0) {return 0;}
@@ -76,7 +76,7 @@ showAmount 函数接受多个参数，
 
 如果是统计金额，通过 for 循环遍历`recordGroup`,将每个`record`的金额进行相加,然后返回总额
 
-## Home 页面
+# Home 页面
 
 ## 首页和记账页面的通信
 
@@ -88,7 +88,7 @@ showAmount 函数接受多个参数，
 
 首先我在 App.vue 中提供一个`eventBus`
 
-```
+```javascript
 @Provide('eventBus') eventBus = new Vue();
 ```
 
@@ -96,7 +96,7 @@ showAmount 函数接受多个参数，
 
 在`this.$nextTick()`中发布的原因是，`eventBus`监听时间是 Money 组件创建后，所以要推迟发布的时间
 
-```
+```javascript
 @Inject() eventBus: any;
 @Prop(Number) selectedMonth: number | undefined;
 
@@ -110,7 +110,7 @@ toMoney(type: string) {
 
 最后在 Money 组件中进行订阅 "update:type",并在组件创建完成后，赋值到 Money 组件的`type`数据中
 
-```
+```javascript
 created() {
   this.eventBus.$on('update:type', (type: string) => {
   this.reset.type = type;
@@ -120,7 +120,7 @@ created() {
 
 上述代码使用的都是 TS 装饰器的写法
 
-## 记账页面
+# 记账页面
 
 ## 如何将记账记录存入 localStorage
 
@@ -128,7 +128,7 @@ created() {
 
 Money 组件中，我先对`record`进行初始化
 
-```
+```javascript
 record = {id: 0, selectedTags: [], notes: '', type: '-', amount: 0}
 ```
 
@@ -140,7 +140,7 @@ record = {id: 0, selectedTags: [], notes: '', type: '-', amount: 0}
 
 于是我写了一个用于深拷贝的`clone`函数
 
-```
+```javascript
 function clone(data) {
   return JSON.parse(JSON.stringify(data));
 }
@@ -148,7 +148,7 @@ function clone(data) {
 
 在存记账记录时，我们可以直接调用`clone`函数
 
-```
+```javascript
 createRecord(state, record) {
   record.createAt = new Date().toISOString();
   const newRecord = clone(record);
@@ -160,13 +160,13 @@ createRecord(state, record) {
   }
 ```
 
-## 标签管理页面
+# 标签管理页面
 
 ## 如何实现 ID 生成器
 
 要实现标签的增删改查，我们需要个每个标签一个独一无二的 ID，于是我写了这样一个 ID 生成器
 
-```
+```javascript
 let id = parseInt(localStorage.getItem('_idMax') || '0') || 0;
 const createId = () => {
   id++;
@@ -181,7 +181,7 @@ const createId = () => {
 
 下一次运行时，得到上一次的`_idMax`，加 1，再存为 id 最大值，返回新 id
 
-## 统计页面
+# 统计页面
 
 ## 如何实现日期选择器
 
@@ -201,7 +201,7 @@ const createId = () => {
 
 这是实现的代码：
 
-```
+```javascript
 createDay(month: number) {
   const daysInMonth = this.getDaysInMonth(month);
   const hashTable = {};
@@ -227,7 +227,7 @@ createDay(month: number) {
 
 当日期为周天的时候，weeks 加一，也就是增加一周
 
-```
+```javascript
 complement(hashTable: dateGroup, month: number) {
   const daysInLastMonth = this.getDaysInMonth(month - 1);
   const last = hashTable[Object.keys(hashTable).length];
@@ -257,9 +257,9 @@ complement(hashTable: dateGroup, month: number) {
 
 获取最后一周，判断长度，如果小于 7 就是没有完整周的日期，需要补全，通过下月的前几天进行补全
 
-## 其他问题
+# 其他问题
 
-- ### 怎么引入 SVG
+## 怎么引入 SVG
 
 在这个项目中多次使用的了 SVG 图片，SVG 全称是 Scalable Vector Graphics，是指伸缩矢量图片，比起 png，jpg 图片，它有很多优点，它是一种基于 XML 语法的图像格式，在项目中我们可以进行二次修改，可以修改颜色，大小，而且它的体积更小。
 
@@ -269,7 +269,7 @@ complement(hashTable: dateGroup, month: number) {
 
 HTML
 
-```
+```html
 <svg class="icon" aria-hidden="true">
     <use xlink:href="#icon-label"></use>
 </svg>
@@ -277,7 +277,7 @@ HTML
 
 CSS
 
-```
+```css
 <style type="text/css">
     .icon {
        width: 1em; height: 1em;
@@ -290,7 +290,7 @@ CSS
 
 JS
 
-```
+```javascript
 import '@/assets/icons/label.svg'
 ```
 
@@ -300,7 +300,7 @@ import '@/assets/icons/label.svg'
 
 首先安装
 
-```
+```bash
 npm i svg-sprite-loader --save
 或者
 yarn add svg-sprite-loader --dev
@@ -308,7 +308,7 @@ yarn add svg-sprite-loader --dev
 
 然后配置 vue.config.js
 
-```
+```javascript
 config.module
       .rule('svg-sprite')  // 找到svg-loader
       .test(/\.svg$/)
@@ -328,7 +328,7 @@ ESLint: Require statement not part of import statement.(@typescript-eslint/no-va
 
 1. 安装错误提示改为 import 引入
 
-```
+```javascript
 import svgLoader from 'svg-sprite-loader/plugin';
 // 然后在使用require的地方替换为 svgLoader
 config.plugin('svg-sprite').use(svgLoader, [{plainSprite: true}])
@@ -336,13 +336,13 @@ config.plugin('svg-sprite').use(svgLoader, [{plainSprite: true}])
 
 2. 告诉 eslint 不检查这行代码（在报错的代码行上一行插入）
 
-```
+```javascript
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 ```
 
 详细的博客记录，请移步：[米奇记账项目实记之 SVG 引入 bug](https://kcvo.top/2020/%E7%B1%B3%E5%A5%87%E8%AE%B0%E8%B4%A6%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%B0%E4%B9%8B-svg%E5%BC%95%E5%85%A5/)
 
-- ### SVG 引入遇到的 bug
+## SVG 引入遇到的 bug
 
 在使用 SVG 图标的过程中，发现有些 SVG 图标，在 SCSS 设置`fill`颜色后，颜色依然不变。
 
@@ -358,11 +358,10 @@ config.plugin('svg-sprite').use(svgLoader, [{plainSprite: true}])
 
 2. 是一个我搜了很久的答案
 
-```
+```javascript
 .use('svgo-loader').loader('svgo-loader')
       .tap(options => ({...options, plugins: [{removeAttrs: {attrs: 'fill'}}]})).end()
 ```
 
 详细的博客记录，请移步：[米奇记账项目实记之 SVG 引入 bug](https://kcvo.top/2020/%E7%B1%B3%E5%A5%87%E8%AE%B0%E8%B4%A6%E9%A1%B9%E7%9B%AE%E5%AE%9E%E8%AE%B0%E4%B9%8B-svg%E5%BC%95%E5%85%A5bug-copy/)
 
-- ###

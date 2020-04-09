@@ -14,7 +14,7 @@ draft: false
 
 ### 需求一：展示名字
 
-```
+```javascript
 // 引用完整版 Vue，方便讲解
 import Vue from "vue/dist/vue.js";
 
@@ -41,7 +41,7 @@ new Vue({
 
 ### 需求二：可以改名字
 
-```
+```javascript
 // 引用完整版 Vue，方便讲解
 import Vue from "vue/dist/vue.js";
 
@@ -93,7 +93,7 @@ new Vue({
 
 请看下面的例子：
 
-```
+```javascript
 // 引用完整版 Vue，方便讲解
 import Vue from "vue/dist/vue.js";
 
@@ -139,7 +139,7 @@ new Vue({
 
 ### deep属性
 
-```
+```javascript
 watch: {
     n() {
       console.log("n 变了")
@@ -162,7 +162,7 @@ watch: {
 
 请看这个例子
 
-```
+```javascript
 // 引用完整版 Vue，方便讲解
 import Vue from "vue/dist/vue.js";
 
@@ -203,7 +203,7 @@ new Vue({
 
 #### 改造一下
 
-```
+```javascript
 watch: {
     firstName: {
       handler: 'change',

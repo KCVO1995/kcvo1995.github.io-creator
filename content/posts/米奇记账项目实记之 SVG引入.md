@@ -36,7 +36,7 @@ SVG全称是Scalable Vector Graphics，是指伸缩矢量图片。我们常用�
 
 由于我引入的下载后的SVG文件，js通过import引入
 
-```
+```javascript
 import '@/assets/icons/label.svg'
 import '@/assets/icons/money.svg'
 import '@/assets/icons/statistics.svg'
@@ -54,7 +54,7 @@ HTML 和 CSS 照文档敲，要注意的是 xlink:href="#icon-xxx" ,icon-xxx是S
 
 安装命令:
 
-```
+```bash
 npm i svg-sprite-loader --save
 或者
 yarn add svg-sprite-loader --dev
@@ -64,7 +64,7 @@ yarn add svg-sprite-loader --dev
 
 在vue.config.js 中添加
 
-```
+```javascript
 config.module
       .rule('svg-sprite')  // 找到svg-loader
       .test(/\.svg$/) 
@@ -84,7 +84,7 @@ ESLint: Require statement not part of import statement.(@typescript-eslint/no-va
 
 1. #### 按照误提示改为 import 引入
 
-```
+```javascript
 import svgLoader from 'svg-sprite-loader/plugin';
 // 然后在使用require的地方替换为 svgLoader
 config.plugin('svg-sprite').use(svgLoader, [{plainSprite: true}])
@@ -106,7 +106,7 @@ config.plugin('svg-sprite').use(svgLoader, [{plainSprite: true}])
 
 于是我在网上找了一个方法可以直接引入icons文件，这样就不用每个icon多次引入了，代码如下
 
-```
+```javascript
 const importAll = (requireContext: __WebpackModuleApi.RequireContext) => requireContext.keys().forEach(requireContext);
   try {
     importAll(require.context('../assets/icons', true, /\.svg$/));
@@ -119,7 +119,7 @@ const importAll = (requireContext: __WebpackModuleApi.RequireContext) => require
 
 按照文档所说，HTML使用的标签是
 
-```
+```html
 <svg class="icon" aria-hidden="true">
     <use :xlink:href= "'#' + name" />
 </svg>
@@ -127,7 +127,7 @@ const importAll = (requireContext: __WebpackModuleApi.RequireContext) => require
 
 那我用到了三个SVG图标，我就要重复三次，代码就太丑了，我们可以封装成Icon组件
 
-```
+```javascript
 <template>
   <svg class="icon" aria-hidden="true">
     <use :xlink:href= "'#' + name" />
@@ -152,7 +152,7 @@ const importAll = (requireContext: __WebpackModuleApi.RequireContext) => require
 
 并在main.ts 中全局引入
 
-```
+```javascript
 import Vue from 'vue';
 import Icon from '@/components/Icon.vue';
 
@@ -161,7 +161,7 @@ Vue.component('Icon', Icon);
 
 这样每个组件使用SVG图标时，只需要即可
 
-```
+```html
 <Icon name="SVG文件名"/>
 ```
 
